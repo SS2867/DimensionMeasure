@@ -1,6 +1,7 @@
 import dot_detector
 import edge_detector
 import argparse
+import cv2
 
 #Construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
