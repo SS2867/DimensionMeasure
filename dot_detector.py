@@ -18,7 +18,9 @@ def red_dot_detect(img):
     while len(circles[0])<2:
         circles = cv2.HoughCircles(img_hsv_red, cv2.HOUGH_GRADIENT, 1,
             img_hsv_red.shape[0]/8, param1=100, param2=20, minRadius=4, maxRadius=60)
-        param2 -=2
+        param2 -=1
+        if param2<=0:
+            return np.array([[]])
     circles = np.round(circles[0, :]).astype("int")
     print(f"Circles: \n{circles}")
     for c in circles:

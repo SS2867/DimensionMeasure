@@ -3,8 +3,8 @@ import numpy as np
 import utils
 
 
-def contour_detect(image):
-    image = cv2.GaussianBlur(image, (9, 9), 0)
+def contour_detect(img):
+    image = cv2.GaussianBlur(img, (9, 9), 0)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     edgeimage = cv2.Canny(gray, 30, 100, apertureSize=3)
 
@@ -21,7 +21,7 @@ def contour_detect(image):
     # 在原图上画出最大的矩形
     cv2.rectangle(img, (x, y), (x + w , y + h ), (0, 255, 0), 2)
 
-    utils.show_img(img)
+    #utils.show_img(image)
 
 
     """max_contour = approx_polygon(contours)
