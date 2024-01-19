@@ -13,11 +13,11 @@ args = vars(ap.parse_args())
 
 img = cv2.imread(args['image'])
 cm = args['width']
-pixel = img.shape[1]
-ratio = cm / pixel
 
 # dot_detector
 dot = red_dot_detect(img)
+pixel = abs(dot[0][0] - dot[1][0])
+ratio = cm / pixel
 cv2.line(img, (dot[0][0], dot[0][1]), (dot[1][0], dot[1][1]), color = (0, 255, 0), thickness = 3)
 img_alt = img.copy()
 
@@ -26,7 +26,6 @@ x1, y1, w1, h1 = contour_detect(img)
 cv2.putText(img, str(round(w1 * ratio, 2)) + " cm", (x1, y1 - 20), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 3)
 cv2.putText(img, str(round(h1 * ratio, 2)) + " cm", (x1 + w1 + 20, y1 + h1 // 2), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 3)
 utils.show_img(img, "Result", "Result.jpg")
-
 
 # edge_detector_alt
 x2, y2, w2, h2 = contour_detect_alt(img_alt)
