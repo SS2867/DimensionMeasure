@@ -10,7 +10,7 @@ def contour_detect(img):
     edgeimage = cv2.Canny(gray, 30, 100, apertureSize=3)
     ret, thresh_l = cv2.threshold(gray, 200, 128, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     ret, thresh_h = cv2.threshold(gray, 200, 128, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-    print(thresh_l.shape)
+
     mask = np.ones_like(thresh_l)*255
     cv2.rectangle(mask, [int(i*0.2) for i in thresh_l.shape[::-1]], [int(i*0.8) for i in thresh_l.shape[::-1]], color=(0,0,0), thickness=-1)
     edgeimage = cv2.bitwise_or(edgeimage, (
@@ -22,7 +22,7 @@ def contour_detect(img):
 
     contours, _hierarchy = cv2.findContours(edgeimage, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    red_dot = red_dot_detect(img)
+    red_dot = red_dot_detect(img, draw=False)
 
     dot = []
     for c in contours:
