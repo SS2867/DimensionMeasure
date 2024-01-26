@@ -1,4 +1,5 @@
 import cv2
+import utils
 
 def contour_detect_alt(img):
     # Blur the image

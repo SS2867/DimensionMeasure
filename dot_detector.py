@@ -25,7 +25,7 @@ def red_dot_detect(img):
     print(f"Circles: \n{circles}")
     for c in circles:
         cv2.circle(img, center=(c[0], c[1]), radius=c[2], color=(0, 255, 255), thickness=2)
-    utils.show_img(img)
+    #utils.show_img(img)
     return circles
 
 if __name__ == "__main__":
