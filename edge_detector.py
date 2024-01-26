@@ -28,12 +28,11 @@ def contour_detect(img):
     for c in contours:
         # 找到边界坐标
         x, y, w, h = cv2.boundingRect(c)  # 计算点集最外面的矩形边界
-        """for d in red_dot:
+        for d in red_dot:
             if cv2.pointPolygonTest(
                 np.array([[x,y], [x+w, y], [x+w, y+h], [x, y+h]], np.int32).reshape((-1, 1, 2)), (int(d[0]), int(d[1])), False)!=-1:
                     break
-        else:"""
-        dot.append([x, y, w, h])
+        else:dot.append([x, y, w, h])
 
     # 找出最大矩形的 x,y,w,h,area
 
