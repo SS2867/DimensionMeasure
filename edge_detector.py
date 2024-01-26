@@ -13,10 +13,12 @@ def contour_detect(img):
 
     mask = np.ones_like(thresh_l)*255
     cv2.rectangle(mask, [int(i*0.2) for i in thresh_l.shape[::-1]], [int(i*0.8) for i in thresh_l.shape[::-1]], color=(0,0,0), thickness=-1)
-    edgeimage = cv2.bitwise_or(edgeimage, (
-        thresh_l if
-        cv2.countNonZero(cv2.bitwise_and(thresh_l,mask)) < cv2.countNonZero(cv2.bitwise_and(thresh_h,mask))
-        else thresh_h))
+    edge_bright_l, edge_bright_h = (cv2.countNonZero(cv2.bitwise_and(i,mask)) for i in (thresh_l, thresh_h))
+    if edge_bright_h/edge_bright_l<0.8 or edge_bright_h/edge_bright_l>1.25:
+        edgeimage = cv2.bitwise_or(edgeimage, (
+            thresh_l if
+            edge_bright_l < edge_bright_h
+            else thresh_h))
 
     #utils.show_img(edgeimage)
 
@@ -29,8 +31,9 @@ def contour_detect(img):
         # 找到边界坐标
         x, y, w, h = cv2.boundingRect(c)  # 计算点集最外面的矩形边界
         for d in red_dot:
-            if cv2.pointPolygonTest(
-                np.array([[x,y], [x+w, y], [x+w, y+h], [x, y+h]], np.int32).reshape((-1, 1, 2)), (int(d[0]), int(d[1])), False)!=-1:
+            if (cv2.pointPolygonTest(
+                np.array([[x,y], [x+w, y], [x+w, y+h], [x, y+h]], np.int32).reshape((-1, 1, 2)), (int(d[0]), int(d[1])), False)!=-1
+                or y+h> d[1]):
                     break
         else:dot.append([x, y, w, h])
 
