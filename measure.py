@@ -15,7 +15,7 @@ img = cv2.imread(args['image'])
 cm = args['width']
 
 # dot_detector
-dot = red_dot_detect(img)
+dot = red_dot_detect(img, draw=False)
 pixel = abs(dot[0][0] - dot[1][0])
 ratio = cm / pixel
 cv2.line(img, (dot[0][0], dot[0][1]), (dot[1][0], dot[1][1]), color = (0, 255, 0), thickness = 3)

@@ -24,7 +24,7 @@ def contour_detect(img):
 
     contours, _hierarchy = cv2.findContours(edgeimage, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    red_dot = red_dot_detect(img, draw=False)
+    red_dot = red_dot_detect(img, draw=True)
 
     dot = []
     for c in contours:
